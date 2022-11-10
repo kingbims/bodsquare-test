@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const { MSG_TYPES } = require('../constants/msgTypes')
+const Task = require('../models/task')
 
 class UserService {
-    getProfile(userId) {
+    getProfile (userId) {
         return new Promise(async (resolve, reject) => {
             try {
                 const user = await User.findById(userId)
@@ -22,7 +23,7 @@ class UserService {
         })
     }
 
-    updateProfile(userId, updateId, data) {
+    updateProfile (userId, updateId, data) {
         return new Promise(async (resolve, reject) => {
             try {
                 const user = await User.findById(userId)
@@ -111,6 +112,7 @@ class UserService {
                 })
 
                 await User.findByIdAndDelete(userId)
+                await Task.findByIdAndDelete(userId)
                 resolve()
             } catch (error) {
                 error.source = 'Delete User Service'
