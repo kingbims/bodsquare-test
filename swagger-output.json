@@ -1,0 +1,275 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Airtable",
+        "version": "1.0.0",
+        "title": "API DOocumentation For Airtable-Bodsquare Hiring  Test"
+
+    },
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "auth",
+            "description": "Auth Endpoints"
+        },
+        {
+            "name": "user",
+            "description": "User Endpoints"
+        }
+    ],
+    "consumes": [
+        "application/json",
+        "application/x-www/form/urlencoded"
+    ],
+    "produces": ["application/json"],
+    "paths": {
+        "/auth/sign-up": {
+            "post": {
+                "tags": ["auth"],
+                "description": "Register an Account",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "obj",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserRegistration"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Registration Successful"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": ["auth"],
+                "description": "Login to an Account",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "obj",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login Successful"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": ["user"],
+                "description": "View Profile",
+                "parameters": [],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource Fetched Successfully"
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "put": {
+                "tags": ["user"],
+                "description": "Update Profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "obj",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateProfile"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource Updated Successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["user"],
+                "description": "Delete Profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "obj",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DeleteProfile"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource Deleted Successfully"
+                    }
+                }
+            }
+        },
+        "/user/changePassword/{id}": {
+            "put": {
+                "tags": ["user"],
+                "description": "Change Password",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "obj",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ChangePassword"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource Updated Successfully"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "name": "x-auth-token",
+          "in": "header"
+        }
+      },
+    "definitions": {
+        "UserRegistration": {
+            "type": "object",
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "password"
+            ],
+            "properties":{
+                "firstName": {
+                    "type": "string",
+                    "example": "Jane"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "name@host.com",
+                    "example": "jane@example.net"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "password@2022#"
+                }
+            }
+        },
+        "UserLogin": {
+            "type": "object",
+            "required": ["email", "password"],
+            "properties":{
+                "email": {
+                    "type": "string",
+                    "format": "name@host.com",
+                    "example": "jane@example.net"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "password@2022#"
+                }
+            }
+        },
+        
+        "UpdateProfile": {
+            "type": "object",
+            "properties":{
+                "firstName": {
+                    "type": "string",
+                    "example": "Jane"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                }
+            }
+        },
+        "ChangePassword": {
+            "type": "object",
+            "required": ["oldPassword", "newPassword"],
+            "properties":{
+                "oldPassword": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "password@2022#"
+                },
+                "newPassword": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "@2022#password"
+                }
+            }
+        },
+        "DeleteProfile": {
+            "type": "object",
+            "required": ["password"],
+            "properties":{
+                "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "password@2022#"
+                }
+            }
+        }
+    }
+}
