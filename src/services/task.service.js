@@ -1,9 +1,8 @@
 const Task = require('../models/task')
-const User = require('../models/user')
 const { MSG_TYPES } = require('../constants/msgTypes')
 
 class TaskService {
-    createTask(body, userId) {
+    createTask(userId, body) {
         return new Promise(async (resolve, reject) => {
             try {
                 const task = await Task.create({
@@ -42,7 +41,7 @@ class TaskService {
                 })
 
                 const updatedTask = await Task.findByIdAndUpdate(
-                    { taskId },
+                    { _id: taskId },
                     body,
                     { new: true }
                 )
@@ -64,7 +63,7 @@ class TaskService {
                     code: 404,
                     msg: MSG_TYPES.NOT_FOUND
                 })
-                resolve(task)
+                resolve()
             } catch (error) {
                 error.source = 'Delete Task Service'
                 return reject(error)

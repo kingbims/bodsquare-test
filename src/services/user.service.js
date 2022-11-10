@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const { MSG_TYPES } = require('../constants/msgTypes')
+const Task = require('../models/task')
 
 class UserService {
     getProfile (userId) {
@@ -111,6 +112,7 @@ class UserService {
                 })
 
                 await User.findByIdAndDelete(userId)
+                await Task.findByIdAndDelete(userId)
                 resolve()
             } catch (error) {
                 error.source = 'Delete User Service'

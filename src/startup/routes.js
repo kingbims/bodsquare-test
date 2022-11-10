@@ -12,6 +12,7 @@ const corsOptions = {
 //Route files
 const auth = require('../routes/auth.route')
 const user = require('../routes/user.route')
+const task = require('../routes/task.route')
 
 //Swagger files
 const swaggerUi = require('swagger-ui-express')
@@ -31,6 +32,7 @@ app.use(loggerMiddleware)
 //Routes
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/user', user)
+app.use('/api/v1/task', task)
 app.use(error)
 
 

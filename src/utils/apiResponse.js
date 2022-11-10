@@ -9,7 +9,6 @@ function JsonResponse (res, status, msg, data = null, meta = null) {
       pagination: {
         pageSize: 1,
         page: 1
-        // currentPage: 1,
       }
     }
   }
