@@ -7,10 +7,6 @@ const MSG_TYPES = Object.freeze({
     NOT_FOUND: 'Not found',
     ACCESS_DENIED: 'Access denied.',
     SESSION_EXPIRED: 'Access denied. Your session has expired',
-    SERVER_ERROR: 'Server error!',
-    ACCOUNT_DELETED: 'Account no longer exists!',
-    NOT_ALLOWED: 'This operation is not allowed',
-    NOT_AUTHORIZED: 'You are not authorized to perform this operation',
     INCORRECT_PASSWORD: 'Incorrect password'
   });
   

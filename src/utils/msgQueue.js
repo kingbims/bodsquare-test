@@ -16,7 +16,7 @@ exports.producer = async () => {
                     throw error
                 }
         
-                const queueName = 'AirTableExchange'
+                const queueName = 'AirtableExchange'
                 let message = 'Task Created Successfully'
                 
                 //Assert queue
@@ -51,7 +51,7 @@ exports.receiver = async () => {
                     throw error
                 }
         
-                const queueName = 'AirTableExchange'
+                const queueName = 'AirtableExchange'
         
                 //Assert queue
                 channel.assertQueue(queueName)
