@@ -1,15 +1,19 @@
 const Task = require('../models/task')
 const { MSG_TYPES } = require('../constants/msgTypes')
+const { producer, receiver } = require('../utils/msgQueue')
+
 
 class TaskService {
     createTask(userId, body) {
         return new Promise(async (resolve, reject) => {
             try {
+                await producer()
                 const task = await Task.create({
                     ...body,
                     userId
                 })
                 resolve(task)
+                await receiver()
             } catch (error) {
                 error.source = 'Create Task Service'
                 return reject(error)

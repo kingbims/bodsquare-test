@@ -14,13 +14,6 @@ const auth = require('../routes/auth.route')
 const user = require('../routes/user.route')
 const task = require('../routes/task.route')
 
-//Swagger files
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('../../swagger-output.json')
-
-//Swagger for API documentation
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
 //Middlewares
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '100mb', extended: true }));
