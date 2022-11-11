@@ -21,10 +21,10 @@ class TaskService {
         })
     }
 
-    readTasks() {
+    readTasks(userId) {
         return new Promise(async (resolve, reject) => {
             try {
-                const tasks = await Task.find()
+                const tasks = await Task.find({ userId })
                 resolve(tasks)
             } catch (error) {
                 error.source = 'Read Tasks Service'

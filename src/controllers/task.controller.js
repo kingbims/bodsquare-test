@@ -22,7 +22,7 @@ exports.createTask = async (req, res, next) => {
 
 exports.readTasks = async (req, res, next) => {
     try {
-        const tasks = await taskInstance.readTasks()
+        const tasks = await taskInstance.readTasks(req.user.id)
         JsonResponse(res, 200, MSG_TYPES.FETCHED, tasks)
     } catch (error) {
         next(error)
