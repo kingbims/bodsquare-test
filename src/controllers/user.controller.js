@@ -33,22 +33,6 @@ exports.updateProfile = async (req, res, next) => {
     }
 }
 
-exports.changePassword = async (req, res, next) => {
-    try {
-        const { error } = validateChangePassword(req.body)
-        if (error) return JsonResponse(res, 400, error.details[0].message)
-
-        const response = await userInstance.changePassword(
-            req.user.id,
-            req.body.oldPassword,
-            req.body.newPassword
-        )
-        JsonResponse(res, 200, MSG_TYPES.UPDATED, response)   
-} catch (error) {
-        next(error)
-    }
-}
-
 exports.deleteProfile = async (req, res, next) => {
     try {
         const { error } = validateDeleteUser(req.body)
